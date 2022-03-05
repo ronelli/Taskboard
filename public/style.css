@@ -1,0 +1,6 @@
+html, body, #app {
+    height: 100%;
+    background-image: linear-gradient(30deg,#2193b0,#6dd5ed);
+    /* background-image:radial-gradient(lightblue,lightgreen) */
+}
+

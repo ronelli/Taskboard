@@ -2,7 +2,7 @@
 <template>
     <div class="singleNote">
         <b-card-header header-tag="header" class="p-1" role="tab" aria-expanded="false">
-            <b-button block v-b-toggle="this.note.id" variant="info" hide>{{headerText}}
+            <b-button block v-b-toggle="this.note.id"  hide>{{headerText}}
                 <b-icon-trash @click="deleteNote" title="Delete Task" variant="black" scale="1"></b-icon-trash>
                 <b-icon v-if="priority" icon="star-fill" font-scale="1" class="highPriorityNote" :id="'tooltip-target-' + this.note.id"></b-icon>
                 <b-tooltip v-if="priority" :target="'tooltip-target-' + this.note.id" triggers="hover" placement="righttop">
@@ -90,8 +90,12 @@ export default {
 .singleNote {
     border: 1px solid black;
     margin:10px;
+    background-color:#fbfadb;
+    color:black !important  
 }
 .btn {
+    color:black !important;
+    background-color:#e0ddb2 !important;
     width: 100%;
 }
 .bi-trash {

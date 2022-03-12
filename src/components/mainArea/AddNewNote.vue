@@ -73,6 +73,7 @@ export default {
           selectedDate: "",
           min: minDate,
           isDone: false,
+          id: ""
       }
   },
   computed: {
@@ -111,6 +112,7 @@ export default {
           this.$store.state.notes.push(obj);
           localStorage.setItem('notes',JSON.stringify(this.$store.state.notes));
           this.$store.state.counter++;
+          localStorage.setItem('notesCounter',this.$store.state.counter);
           this.title = "";
           this.description = "";
           this.selectedDate = "";
@@ -125,7 +127,7 @@ export default {
 .bi-plus {
   font-size: 50px;
 }
-/deep/ .modal-header {
+::v-deep header.modal-header {
     display: inline !important;
 }
 .close-icon {

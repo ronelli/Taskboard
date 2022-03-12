@@ -4,18 +4,22 @@
         <AddNewNote ></AddNewNote>
         <!-- <div class="notes"> -->
         <div id="allNotes">
-            <div id="toDo">
-                <h2>TO DO</h2>
-                <draggable  class="notes"  @change="toDoChange($event)" :list="notes" :options="{group:'allTasks'}" :animation="200">
-                    <SingleNote v-for="(note,index) in notes" :note="note" :key="index" draggable="true"></SingleNote>
-                </draggable>
-            </div>
-            <div id="done">
-                <h2>DONE</h2>
-                <draggable class="notes" @change="doneNotesChange($event)" :list="doneNotes" :options="{group:'allTasks'}" :animation="200">
-                    <SingleNote v-for="(note,index) in doneNotes" :note="note" :key="index" draggable="true"></SingleNote>
-                </draggable>
-            </div>
+                    <div class="accordion" role="tablist">
+                <div id="toDo">
+                    <h2>TO DO</h2>
+                        <draggable  class="notes"  @change="toDoChange($event)" :list="notes" :options="{group:'allTasks'}" :animation="200">
+                            <SingleNote v-for="(note,index) in notes" :note="note" :key="index" draggable="true"></SingleNote>
+                        </draggable>
+                    <!-- </div> -->
+                </div>
+                <div id="done">
+                    <h2>DONE</h2>
+                    <!-- <div class="accordion" role="tablist"> -->
+                        <draggable class="notes" @change="doneNotesChange($event)" :list="doneNotes" :options="{group:'allTasks'}" :animation="200">
+                            <SingleNote v-for="(note,index) in doneNotes" :note="note" :key="index" draggable="true"></SingleNote>
+                        </draggable>
+                    </div>
+                </div>
         </div>
     </div>
 </template>
@@ -59,17 +63,19 @@ export default {
       getFromStorage() {
           const data = localStorage.getItem('notes');
           const doneData = localStorage.getItem('doneNotes');
+          const counter = localStorage.getItem('notesCounter');
           const toDoNotes = JSON.parse(data); 
           const done = JSON.parse(doneData);
-          this.setNotesInfoInState(toDoNotes, done);
+          this.setNotesInfoInState(toDoNotes, done, counter);
       },
-      setNotesInfoInState(toDo, done) {
+      setNotesInfoInState(toDo, done, counter) {
         toDo.forEach(n => {
             this.$store.state.notes.push(n);
         });
         done.forEach(n => {
             this.$store.state.doneNotes.push(n);
         });
+        if(counter) this.$store.state.counter = counter;
       }
   },
   beforeMount() {
@@ -103,6 +109,10 @@ ul {
     border:1px solid gray;
     border-radius: 10px;
 }
+
+.accordion {
+    display: contents;
+}
 #allNotes {
     display: grid;
     gap:10px;
@@ -117,6 +127,9 @@ h2 {
 
 .notes {
     height: 90%;
+}
+.container h2 {
+    font-family: mainFont;
 }
 .container {
     height: 80%;

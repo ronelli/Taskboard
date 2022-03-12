@@ -1,19 +1,17 @@
 
 <template>
     <div class="singleNote">
-                <b-card
-                border-variant="secondary"
-                :header="headerText"
-                header-border-variant="secondary"
-                align="center"
-                
-            >
-                <b-icon-trash @click="deleteNote" title="Delete Task" variant="black" scale="1.4"></b-icon-trash>
-                
-                <b-icon v-if="priority" icon="star-fill" font-scale="2" class="highPriorityNote" :id="'tooltip-target-' + this.note.id"></b-icon>
+        <b-card-header header-tag="header" class="p-1" role="tab" aria-expanded="false">
+            <b-button block v-b-toggle="this.note.id" variant="info" hide>{{headerText}}
+                <b-icon-trash @click="deleteNote" title="Delete Task" variant="black" scale="1"></b-icon-trash>
+                <b-icon v-if="priority" icon="star-fill" font-scale="1" class="highPriorityNote" :id="'tooltip-target-' + this.note.id"></b-icon>
                 <b-tooltip v-if="priority" :target="'tooltip-target-' + this.note.id" triggers="hover" placement="righttop">
                     <b>High Priority Task</b>
                 </b-tooltip>
+            </b-button>
+        </b-card-header>
+        <b-collapse  :id="this.note.id"  accordion="my-accordion" role="tabpanel">
+            <b-card-body>
                 <b-card-text>
                     <div>
                         <span> {{this.note.description}}</span>
@@ -26,8 +24,8 @@
                         <span v-else>Expire Date: none</span>
                     </div>
                 </b-card-text>
-            </b-card> 
-            
+            </b-card-body>
+        </b-collapse>
     </div>
 </template>
 
@@ -39,13 +37,6 @@ export default {
     note: {
     }
   },
-//   data() {
-    //   return {
-        //   title: "",
-        //   description:"",
-        //   id: ""
-    //   }
-//   },
   computed: {
       headerText() {
           return this.note.title;   
@@ -97,20 +88,25 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .singleNote {
+    border: 1px solid black;
     margin:10px;
+}
+.btn {
+    width: 100%;
 }
 .bi-trash {
     cursor: pointer;
-    position: absolute !important;
+    position: relative !important;
     float: right !important;
     top: 10% !important;
-    right: 2% !important;
+    /* right: 2% !important; */
 }
 .highPriorityNote {
+    float: left;
     color: black;
     font-weight: bold;
     font-size: smaller;
-    position:absolute;
+    /* position:absolute; */
     left:2%;
     top:0;
 }

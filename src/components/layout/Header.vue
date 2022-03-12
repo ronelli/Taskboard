@@ -30,13 +30,10 @@ export default {
     top:50%;
     left:5%;
 }
-/* .sorting {
-    float:left;
-    display:inline-block;
-    position:relative;
-    left:5%;
-    top:30px;
-} */
+.sorting {
+    position: sticky;
+    top: 50%;
+}
 ul {
   list-style-type: none;
   padding: 0;

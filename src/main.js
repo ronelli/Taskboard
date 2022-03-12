@@ -5,7 +5,7 @@ import Notes from './components/mainArea/Notes.vue'
 import SingleNote from './components/mainArea/SingleNote.vue'
 import AddNewNote from './components/mainArea/AddNewNote.vue'
 import SortingNotes from "./components/mainArea/SortingNotes.vue";
-import { BootstrapVue, IconsPlugin, BootstrapVueIcons, TooltipPlugin  } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin, BootstrapVueIcons, TooltipPlugin, FormSelectPlugin  } from 'bootstrap-vue'
 import draggable from 'vuedraggable';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -20,6 +20,9 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 Vue.use(BootstrapVueIcons);
+
+//Make bootstrap form select available throughout the project
+Vue.use(FormSelectPlugin);
 
 Vue.use(Vuex);
 const store = new Vuex.Store({

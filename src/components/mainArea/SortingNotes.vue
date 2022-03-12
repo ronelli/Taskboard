@@ -1,12 +1,7 @@
 
 <template>
     <div class="sortingNotes">
-        <select v-model="selected" @change="onChange($event)">
-            <option disabled value="">sort notes</option>
-            <option value="1">by title</option>
-            <option value="2">by priority</option>
-            <option value="3">by expired date </option>
-        </select>  
+        <b-form-select v-model="selected" :options="options" @change="onChange($event)" class="mb-3"></b-form-select>
     </div>
 </template>
 
@@ -20,26 +15,30 @@ export default {
   },
   data() {
       return {
-          selected: ""
+        selected: null,
+        options: [
+          { value: null, text: 'Sort notes' },
+          { value: '1', text: 'Sort by title' },
+          { value: '2', text: 'Sort by priority' },
+          { value: '3', text: 'Sort by expired date'}
+        ]
+
       }
   },
   methods:{
-      onChange(event) {
-          this.sortNotes(event.target.value);
+      onChange(val) {
+          this.sortNotes(val);
       },
       sortNotes(option) {
         switch(Number(option)){
             case 1:
                 this.titleSorting();
-                console.log('sort by title');
                 break;
             case 2:
                 this.prioritySorting();
-                console.log('sort by priority');
                 break;
             case 3: 
                 this.expiredTask();
-                console.log('sort by expired date');
                 break;
         }
       },
